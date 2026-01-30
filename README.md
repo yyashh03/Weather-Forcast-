@@ -1,0 +1,90 @@
+SkyCast Weather App
+A dynamic, fully responsive weather dashboard built with PHP and JavaScript. This application fetches real-time weather data and 5-day forecasts using the OpenWeatherMap API, featuring a modern "Glassmorphism" UI that adapts visually to current weather conditions.
+
+(Tip: Take a screenshot of your app, upload it to the repo, and replace the link above with the path to your image, e.g., ./screenshot.png)
+
+🚀 Features
+Real-Time Data: Displays current temperature, humidity, wind speed, pressure, and visibility.
+
+5-Day Forecast: Horizontal scroll view for upcoming weather in 3-hour intervals.
+
+Dynamic Backgrounds: The background gradient changes automatically based on the weather (Sunny, Rainy, Snowy, etc.).
+
+Backend Proxy (PHP): Secures the API key by making requests server-side instead of exposing it in the frontend code.
+
+Smart Caching: Implements file-based JSON caching to minimize API calls and improve load times.
+
+Glassmorphism UI: Modern, translucent design using CSS backdrop-filter.
+
+Error Handling: Robust handling for invalid city names and network issues.
+
+🛠️ Tech Stack
+Frontend: HTML5, CSS3 (Flexbox/Grid), Vanilla JavaScript (ES6+).
+
+Backend: PHP (cURL, File Handling).
+
+API: OpenWeatherMap API.
+
+Server: Apache (via XAMPP/WAMP).
+
+⚙️ Installation & Setup
+Follow these steps to run the project locally on your machine.
+
+Prerequisites
+XAMPP (or any local PHP server) installed.
+
+An active API Key from OpenWeatherMap (Free tier).
+
+Steps
+Clone the Repository Navigate to your XAMPP htdocs folder and clone this repo:
+
+Bash
+cd C:/xampp/htdocs/
+git clone https://github.com/your-username/weather-app.git
+Configure API Key Open weather.php in your code editor and find the configuration section:
+
+PHP
+// weather.php
+$apiKey = "YOUR_API_KEY_HERE"; // Replace with your actual OpenWeatherMap Key
+Start the Server
+
+Open the XAMPP Control Panel.
+
+Start the Apache module.
+
+Run the App Open your browser and navigate to: http://localhost/weather-app/
+
+📂 Project Structure
+Plaintext
+weather-app/
+├── cache/              # Auto-generated folder for JSON cache files
+├── index.html          # Main user interface
+├── script.js           # Frontend logic (DOM manipulation, Fetch API)
+├── weather.php         # Backend logic (API Proxy, Caching, SSL handling)
+└── README.md           # Project documentation
+🧠 How It Works
+User Input: The user enters a city name in index.html.
+
+Request: script.js sends a request to weather.php (e.g., weather.php?city=London).
+
+Cache Check: weather.php checks if a valid cache file exists for that city (created within the last hour).
+
+If yes: It serves the data immediately from the JSON file.
+
+If no: It fetches fresh data from OpenWeatherMap, saves it to a file, and then serves it.
+
+Rendering: The frontend receives the JSON, updates the DOM elements, and adjusts the CSS background based on the weather.main condition.
+
+🔮 Future Improvements
+Add Geolocation support to automatically detect user location.
+
+Add a toggle for Celsius/Fahrenheit.
+
+Implement a "Recent Searches" history using LocalStorage.
+
+👤 Author
+Yashveer Singh
+
+GitHub: @yourusername
+
+Email: 0241csai001@niet.co.in
