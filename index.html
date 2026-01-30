@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCast Weather</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5); /* Default BG */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            transition: background 1s ease; /* Smooth background transition */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 450px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px); /* The Blur Effect */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            color: var(--text-color);
+            transition: transform 0.3s ease;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.6);
+            outline: none;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover { background: #555; }
+
+        /* Current Weather Styles */
+        .weather-header { text-align: center; }
+        .temp-huge { font-size: 4rem; font-weight: bold; margin: 10px 0; }
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+            background: rgba(255,255,255,0.3);
+            padding: 15px;
+            border-radius: 15px;
+        }
+        .detail-item { text-align: center; font-size: 0.9rem; }
+        .detail-item i { font-size: 1.2rem; margin-bottom: 5px; color: #444; }
+
+        /* Forecast Styles */
+        .forecast-title { margin-top: 30px; margin-bottom: 10px; font-weight: 600; }
+        .forecast-scroller {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 10px;
+        }
+        .forecast-card {
+            min-width: 80px;
+            background: rgba(255,255,255,0.4);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        
+        /* Utility */
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="city-input" placeholder="Search City..." onkeypress="handleEnter(event)">
+            <button onclick="getWeather()"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div id="loading" class="hidden" style="text-align: center;">Loading...</div>
+
+        <div id="weather-content" class="hidden">
+            <div class="weather-header">
+                <h2 id="city-name">City Name</h2>
+                <img id="weather-icon" src="" alt="Icon" width="80">
+                <div class="temp-huge"><span id="temp">0</span>°</div>
+                <div id="description" style="text-transform: capitalize;">Clear Sky</div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <i class="fas fa-tint"></i><br>
+                    Humidity: <span id="humidity">0</span>%
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-wind"></i><br>
+                    Wind: <span id="wind">0</span> m/s
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-compress-arrows-alt"></i><br>
+                    Pressure: <span id="pressure">0</span> hPa
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-eye"></i><br>
+                    Visibility: <span id="visibility">0</span> km
+                </div>
+            </div>
+
+            <div class="forecast-title">Upcoming Forecast (3h Intervals)</div>
+            <div class="forecast-scroller" id="forecast-container">
+                </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
